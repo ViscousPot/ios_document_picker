@@ -1,10 +1,10 @@
 name: ios_document_picker
-description: A new Flutter plugin project.
+description: Flutter wrapper of iOS UIDocumentPickerViewController.
 version: 0.0.1
-homepage:
+homepage: https://github.com/flutter-cavalry/ios_document_picker
 
 environment:
-  sdk: '>=2.19.3 <3.0.0'
+  sdk: ">=2.19.3 <4.0.0"
   flutter: ">=2.5.0"
 
 dependencies:

@@ -52,7 +52,7 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
   }
   
   private func urlToMap(_ url: URL) -> [String: String] {
-    return ["uri": url.absoluteString, "path": url.path]
+    return ["url": url.absoluteString, "path": url.path]
   }
   
   public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {

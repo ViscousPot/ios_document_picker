@@ -5,18 +5,18 @@ import 'ios_document_picker_method_channel.dart';
 enum DocumentPickerType { file, directory }
 
 class DocumentPickerPath {
-  final Uri uri;
+  final String url;
   final String path;
 
-  DocumentPickerPath(this.uri, this.path);
+  DocumentPickerPath(this.url, this.path);
 
   static DocumentPickerPath fromMap(Map<dynamic, dynamic> map) {
-    return DocumentPickerPath(Uri.parse(map['uri']), map['path']);
+    return DocumentPickerPath(map['url'], map['path']);
   }
 
   @override
   String toString() {
-    return 'Uri: $uri | Path: $path';
+    return 'Url: $url | Path: $path';
   }
 }
 

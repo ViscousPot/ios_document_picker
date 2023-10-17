@@ -1,15 +1,21 @@
 # ios_document_picker
 
-A new Flutter plugin project.
+[![pub package](https://img.shields.io/pub/v/ios_document_picker.svg)](https://pub.dev/packages/ios_document_picker)
 
-## Getting Started
+Flutter wrapper of iOS `UIDocumentPickerViewController`.
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+## Usage
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+import 'package:ios_document_picker/ios_document_picker.dart';
 
+final _iosDocumentPickerPlugin = IosDocumentPicker();
+
+var result = await _iosDocumentPickerPlugin.pick(/* DocumentPickerType.file or directory */);
+if (result == null) {
+  // Cancelled.
+  return;
+}
+print(result.url);
+print(result.path);
+```
