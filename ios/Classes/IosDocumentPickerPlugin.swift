@@ -24,7 +24,7 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       
       let mode = PickerMode(rawValue: args["type"] as! Int)
       let documentPicker =
-      UIDocumentPickerViewController(forOpeningContentTypes: mode == .folder ? [UTType.folder] : [UTType.item])
+      UIDocumentPickerViewController(forOpeningContentTypes: mode == .folder ? [UTType.folder] : [UTType.data])
       documentPicker.delegate = self
 
       // Present the document picker.
