@@ -19,3 +19,8 @@ if (result == null) {
 print(result.url);
 print(result.path);
 ```
+
+### Options
+
+- `allowedUtiTypes`: List of allowed UTI types.
+- `multiple`: Allow multiple selection.

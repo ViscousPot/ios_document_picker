@@ -23,9 +23,15 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       resultFn = result
       
       let mode = PickerMode(rawValue: args["type"] as! Int)
+      let allowsMultiple = args["multiple"] as? Bool ?? false
+      let allowedUtiTypes = args["allowedUtiTypes"] as? [String]
+      
+      let utTypes = allowedUtiTypes?.compactMap { UTType($0) }
+      
       let documentPicker =
-      UIDocumentPickerViewController(forOpeningContentTypes: mode == .folder ? [UTType.folder] : [UTType.data])
+      UIDocumentPickerViewController(forOpeningContentTypes: utTypes ?? (mode == .folder ? [UTType.folder] : [UTType.data]))
       documentPicker.delegate = self
+      documentPicker.allowsMultipleSelection = allowsMultiple
 
       // Present the document picker.
       currentViewController()?.present(documentPicker, animated: true, completion: nil)

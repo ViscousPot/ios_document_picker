@@ -41,7 +41,11 @@ abstract class IosDocumentPickerPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<List<DocumentPickerPath>?> pick(DocumentPickerType type) {
+  Future<List<DocumentPickerPath>?> pick(
+    DocumentPickerType type, {
+    bool? multiple,
+    List<String>? allowedUtiTypes,
+  }) {
     throw UnimplementedError('pick() has not been implemented.');
   }
 }

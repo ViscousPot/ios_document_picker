@@ -10,9 +10,17 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
   final methodChannel = const MethodChannel('ios_document_picker');
 
   @override
-  Future<List<DocumentPickerPath>?> pick(DocumentPickerType type) async {
-    var maps = await methodChannel
-        .invokeListMethod<Map<dynamic, dynamic>>('pick', {'type': type.index});
+  Future<List<DocumentPickerPath>?> pick(
+    DocumentPickerType type, {
+    bool? multiple,
+    List<String>? allowedUtiTypes,
+  }) async {
+    var maps = await methodChannel.invokeListMethod<Map<dynamic, dynamic>>(
+        'pick', {
+      'type': type.index,
+      'multiple': multiple,
+      'allowedUtiTypes': allowedUtiTypes
+    });
     if (maps == null) {
       return null;
     }
