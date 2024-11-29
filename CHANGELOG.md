@@ -1,3 +1,8 @@
+# 0.2.0
+
+- Add `allowedUtiTypes` param.
+- Add `multiple` param.
+
 ## 0.1.0
 
 - Use `UTType.data` for files.

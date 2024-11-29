@@ -16,7 +16,7 @@ class DocumentPickerPath {
 
   @override
   String toString() {
-    return 'Url: $url | Path: $path';
+    return 'DocumentPickerPath{url: $url, path: $path}';
   }
 }
 

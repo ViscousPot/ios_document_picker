@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   final _iosDocumentPickerPlugin = IosDocumentPicker();
   var _output = '';
   var _mode = DocumentPickerType.file;
+  var _multiple = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +64,17 @@ class _MyAppState extends State<MyApp> {
                 const SizedBox(
                   height: 10,
                 ),
+                CheckboxListTile(
+                    value: _multiple,
+                    onChanged: (value) {
+                      setState(() {
+                        _multiple = value!;
+                      });
+                    },
+                    title: const Text('Multiple selection')),
+                const SizedBox(
+                  height: 10,
+                ),
                 OutlinedButton(onPressed: _start, child: const Text('Pick'))
               ],
             ),
@@ -73,7 +85,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _start() async {
-    var result = await _iosDocumentPickerPlugin.pick(_mode);
+    var result =
+        await _iosDocumentPickerPlugin.pick(_mode, multiple: _multiple);
     if (result == null) {
       setState(() {
         _output = 'Cancelled';
@@ -81,7 +94,7 @@ class _MyAppState extends State<MyApp> {
       return;
     }
     setState(() {
-      _output = result.toString();
+      _output = result.map((e) => e.toString()).join('\n\n');
     });
   }
 }
