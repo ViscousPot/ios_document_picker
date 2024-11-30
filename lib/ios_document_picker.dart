@@ -1,3 +1,5 @@
+import 'package:ios_document_picker/types.dart';
+
 import 'ios_document_picker_platform_interface.dart';
 
 class IosDocumentPicker {

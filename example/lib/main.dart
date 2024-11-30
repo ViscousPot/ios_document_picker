@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:ios_document_picker/ios_document_picker.dart';
-import 'package:ios_document_picker/ios_document_picker_platform_interface.dart';
+import 'package:ios_document_picker/types.dart';
 
 void main() {
   runApp(const MyApp());

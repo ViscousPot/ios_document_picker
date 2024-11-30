@@ -1,25 +1,7 @@
+import 'package:ios_document_picker/types.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'ios_document_picker_method_channel.dart';
-
-enum IosDocumentPickerType { file, directory }
-
-class IosDocumentPickerPath {
-  final String url;
-  final String path;
-  final String name;
-
-  IosDocumentPickerPath(this.url, this.path, this.name);
-
-  static IosDocumentPickerPath fromMap(Map<dynamic, dynamic> map) {
-    return IosDocumentPickerPath(map['url'], map['path'], map['name']);
-  }
-
-  @override
-  String toString() {
-    return 'DocumentPickerPath{name: $name, url: $url, path: $path}';
-  }
-}
 
 abstract class IosDocumentPickerPlatform extends PlatformInterface {
   /// Constructs a IosDocumentPickerPlatform.

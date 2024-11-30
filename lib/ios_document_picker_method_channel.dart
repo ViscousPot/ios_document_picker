@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:ios_document_picker/types.dart';
 
 import 'ios_document_picker_platform_interface.dart';
 
