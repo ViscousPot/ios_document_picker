@@ -10,8 +10,8 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
   final methodChannel = const MethodChannel('ios_document_picker');
 
   @override
-  Future<List<DocumentPickerPath>?> pick(
-    DocumentPickerType type, {
+  Future<List<IosDocumentPickerPath>?> pick(
+    IosDocumentPickerType type, {
     bool? multiple,
     List<String>? allowedUtiTypes,
   }) async {
@@ -24,6 +24,6 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
     if (maps == null) {
       return null;
     }
-    return maps.map((e) => DocumentPickerPath.fromMap(e)).toList();
+    return maps.map((e) => IosDocumentPickerPath.fromMap(e)).toList();
   }
 }

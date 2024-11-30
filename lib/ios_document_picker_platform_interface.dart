@@ -2,21 +2,22 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'ios_document_picker_method_channel.dart';
 
-enum DocumentPickerType { file, directory }
+enum IosDocumentPickerType { file, directory }
 
-class DocumentPickerPath {
+class IosDocumentPickerPath {
   final String url;
   final String path;
+  final String name;
 
-  DocumentPickerPath(this.url, this.path);
+  IosDocumentPickerPath(this.url, this.path, this.name);
 
-  static DocumentPickerPath fromMap(Map<dynamic, dynamic> map) {
-    return DocumentPickerPath(map['url'], map['path']);
+  static IosDocumentPickerPath fromMap(Map<dynamic, dynamic> map) {
+    return IosDocumentPickerPath(map['url'], map['path'], map['name']);
   }
 
   @override
   String toString() {
-    return 'DocumentPickerPath{url: $url, path: $path}';
+    return 'DocumentPickerPath{name: $name, url: $url, path: $path}';
   }
 }
 
@@ -41,8 +42,8 @@ abstract class IosDocumentPickerPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<List<DocumentPickerPath>?> pick(
-    DocumentPickerType type, {
+  Future<List<IosDocumentPickerPath>?> pick(
+    IosDocumentPickerType type, {
     bool? multiple,
     List<String>? allowedUtiTypes,
   }) {

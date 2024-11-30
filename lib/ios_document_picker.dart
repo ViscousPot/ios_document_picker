@@ -1,8 +1,8 @@
 import 'ios_document_picker_platform_interface.dart';
 
 class IosDocumentPicker {
-  Future<List<DocumentPickerPath>?> pick(
-    DocumentPickerType type, {
+  Future<List<IosDocumentPickerPath>?> pick(
+    IosDocumentPickerType type, {
     bool? multiple,
     List<String>? allowedUtiTypes,
   }) {

@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _iosDocumentPickerPlugin = IosDocumentPicker();
   var _output = '';
-  var _mode = DocumentPickerType.file;
+  var _mode = IosDocumentPickerType.file;
   var _multiple = false;
 
   @override
@@ -39,10 +39,10 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ListTile(
                   title: const Text('File'),
-                  leading: Radio<DocumentPickerType>(
-                    value: DocumentPickerType.file,
+                  leading: Radio<IosDocumentPickerType>(
+                    value: IosDocumentPickerType.file,
                     groupValue: _mode,
-                    onChanged: (DocumentPickerType? value) {
+                    onChanged: (IosDocumentPickerType? value) {
                       setState(() {
                         _mode = value!;
                       });
@@ -51,10 +51,10 @@ class _MyAppState extends State<MyApp> {
                 ),
                 ListTile(
                   title: const Text('Directory'),
-                  leading: Radio<DocumentPickerType>(
-                    value: DocumentPickerType.directory,
+                  leading: Radio<IosDocumentPickerType>(
+                    value: IosDocumentPickerType.directory,
                     groupValue: _mode,
-                    onChanged: (DocumentPickerType? value) {
+                    onChanged: (IosDocumentPickerType? value) {
                       setState(() {
                         _mode = value!;
                       });
