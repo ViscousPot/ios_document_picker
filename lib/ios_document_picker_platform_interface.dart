@@ -31,4 +31,12 @@ abstract class IosDocumentPickerPlatform extends PlatformInterface {
   }) {
     throw UnimplementedError('pick() has not been implemented.');
   }
+
+  Future<bool> startAccessing(String fileUrl) async {
+    throw UnimplementedError('pick() has not been implemented.');
+  }
+
+  Future<void> stopAccessing(String fileUrl) async {
+    throw UnimplementedError('pick() has not been implemented.');
+  }
 }

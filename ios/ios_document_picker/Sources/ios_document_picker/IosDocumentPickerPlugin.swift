@@ -37,7 +37,22 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
 
       // Present the document picker.
       currentViewController()?.present(documentPicker, animated: true, completion: nil)
-
+    case "startAccessing":
+      if let urlStr = call.arguments as? String,
+          let url = URL(string: urlStr) {
+        let success = url.startAccessingSecurityScopedResource()
+        result(success)
+      } else {
+        result(false)
+      }
+    case "stopAccessing":
+      if let urlStr = call.arguments as? String,
+        let url = URL(string: urlStr) {
+        url.stopAccessingSecurityScopedResource()
+        result(nil)
+      } else {
+        result(FlutterError(code: "INVALID_URL", message: "Invalid URL", details: nil))
+      } 
     default:
       result(FlutterMethodNotImplemented)
     }
