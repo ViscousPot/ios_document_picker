@@ -7,6 +7,8 @@ enum PickerMode: Int { case file, folder }
 public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerDelegate {
   var resultFn: FlutterResult?
 
+  private var resolvedUrls: [String: URL] = [:];
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(
       name: "ios_document_picker", binaryMessenger: registrar.messenger())
@@ -44,7 +46,7 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       }
       do {
         var isStale: Bool = false
-        let url = try URL(resolvingBookmarkData: bookmark, relativeTo: nil, options: [.withSecurityScope], bookmarkDataIsStale: &isStale)
+        let url = try URL(resolvingBookmarkData: bookmark, options: [], relativeTo: nil, bookmarkDataIsStale: &isStale)
         print("resolved bookmark to: \(url) (\(isStale))")
         if (url.isFileURL) {
           resolvedUrls[url.path] = url
