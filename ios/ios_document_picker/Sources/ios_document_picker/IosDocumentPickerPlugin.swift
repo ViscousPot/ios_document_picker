@@ -44,7 +44,7 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       }
       do {
         var isStale: Bool = false
-        let url = try URL(resolvingBookmarkData: bookmark, options: .withSecurityScope, bookmarkDataIsStale: &isStale)
+        let url = try URL(resolvingBookmarkData: bookmark, relativeTo: nil, options: [.withSecurityScope], bookmarkDataIsStale: &isStale)
         print("resolved bookmark to: \(url) (\(isStale))")
         if (url.isFileURL) {
           resolvedUrls[url.path] = url
@@ -56,14 +56,14 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       } catch {
         result(FlutterError(code: "UnexpectedError", message: "Error while resolving bookmark \(error)", details: nil))
       }
-    case "startAccessingSecurityScopedResourceWithBookmark":
-      // if let urlStr = call.arguments as? String,
-          let url = URL(string: urlStr) {
-        let success = url.startAccessingSecurityScopedResource()
-        result(success)
-      } else {
-        result(false)
-      }
+    // case "startAccessingSecurityScopedResourceWithBookmark":
+    //   // if let urlStr = call.arguments as? String,
+    //       let url = URL(string: urlStr) {
+    //     let success = url.startAccessingSecurityScopedResource()
+    //     result(success)
+    //   } else {
+    //     result(false)
+    //   }
     // case "stopAccessing":
     //   if let urlStr = call.arguments as? String,
     //     let url = URL(string: urlStr) {
