@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ios_document_picker/types.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -29,6 +31,10 @@ abstract class IosDocumentPickerPlatform extends PlatformInterface {
     bool? multiple,
     List<String>? allowedUtiTypes,
   }) {
+    throw UnimplementedError('pick() has not been implemented.');
+  }
+
+  Future<FileSystemEntity> resolveBookmark(String bookmark, {bool isDirectory = false}) {
     throw UnimplementedError('pick() has not been implemented.');
   }
 

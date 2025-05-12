@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:ios_document_picker/types.dart';
@@ -22,6 +24,16 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
       return null;
     }
     return maps.map((e) => IosDocumentPickerPath.fromMap(e)).toList();
+  }
+
+  @override
+  Future<FileSystemEntity> resolveBookmark(String bookmark, {bool isDirectory = false}) async {
+    final String filePath = await methodChannel.invokeMethod('resolveBookmark', {'bookmark': bookmark});
+    if (isDirectory) {
+      return Directory(filePath);
+    } else {
+      return File(filePath);
+    }
   }
 
   @override

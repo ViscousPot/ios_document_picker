@@ -35,24 +35,43 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       documentPicker.delegate = self
       documentPicker.allowsMultipleSelection = allowsMultiple
 
-      // Present the document picker.
       currentViewController()?.present(documentPicker, animated: true, completion: nil)
-    case "startAccessing":
-      if let urlStr = call.arguments as? String,
+    case "resolveBookmark":
+      guard let bookmark64 = args["bookmark"] as? String,
+        let bookmark = Data.init(base64Encoded: bookmark64) else {
+        result(FlutterError(code: "InvalidArguments", message: "expected bookmark argument to be string.", details: nil))
+        return
+      }
+      do {
+        var isStale: Bool = false
+        let url = try URL(resolvingBookmarkData: bookmark, options: .withSecurityScope, bookmarkDataIsStale: &isStale)
+        print("resolved bookmark to: \(url) (\(isStale))")
+        if (url.isFileURL) {
+          resolvedUrls[url.path] = url
+          result(url.path)
+        } else {
+          result(FlutterError(code: "InvalidBookmark", message: "Bookmark is no file url. \(url)", details: nil))
+          return
+        }
+      } catch {
+        result(FlutterError(code: "UnexpectedError", message: "Error while resolving bookmark \(error)", details: nil))
+      }
+    case "startAccessingSecurityScopedResourceWithBookmark":
+      // if let urlStr = call.arguments as? String,
           let url = URL(string: urlStr) {
         let success = url.startAccessingSecurityScopedResource()
         result(success)
       } else {
         result(false)
       }
-    case "stopAccessing":
-      if let urlStr = call.arguments as? String,
-        let url = URL(string: urlStr) {
-        url.stopAccessingSecurityScopedResource()
-        result(nil)
-      } else {
-        result(FlutterError(code: "INVALID_URL", message: "Invalid URL", details: nil))
-      } 
+    // case "stopAccessing":
+    //   if let urlStr = call.arguments as? String,
+    //     let url = URL(string: urlStr) {
+    //     url.stopAccessingSecurityScopedResource()
+    //     result(nil)
+    //   } else {
+    //     result(FlutterError(code: "INVALID_URL", message: "Invalid URL", details: nil))
+    //   } 
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -75,7 +94,8 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
   }
 
   private func urlToMap(_ url: URL) -> [String: String] {
-    return ["url": url.absoluteString, "path": url.path, "name": url.lastPathComponent]
+    let bookmark = try url.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil);
+    return ["url": url.absoluteString, "path": url.path, "name": url.lastPathComponent, "bookmark": bookmark.base64EncodedString()]
   }
 
   public func documentPicker(
