@@ -34,7 +34,7 @@ abstract class IosDocumentPickerPlatform extends PlatformInterface {
     throw UnimplementedError('pick() has not been implemented.');
   }
 
-  Future<FileSystemEntity> resolveBookmark(String bookmark, {bool isDirectory = false}) {
+  Future<String> resolveBookmark(String bookmark, {bool isDirectory = false}) {
     throw UnimplementedError('pick() has not been implemented.');
   }
 
