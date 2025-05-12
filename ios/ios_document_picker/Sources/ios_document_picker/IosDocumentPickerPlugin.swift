@@ -96,8 +96,14 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
   }
 
   private func urlToMap(_ url: URL) -> [String: String] {
-    let bookmark = try url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil);
-    return ["url": url.absoluteString, "path": url.path, "name": url.lastPathComponent, "bookmark": bookmark.base64EncodedString()]
+      let bookmark: String
+      do {
+        let data = try url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil)
+        bookmark = data.base64EncodedString()
+      } catch {
+        bookmark = ""
+      }
+      return ["url": url.absoluteString, "path": url.path, "name": url.lastPathComponent, "bookmark": bookmark.base64EncodedString()]
   }
 
   public func documentPicker(
