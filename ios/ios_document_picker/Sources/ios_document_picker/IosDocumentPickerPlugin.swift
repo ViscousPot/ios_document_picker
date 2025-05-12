@@ -103,7 +103,7 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       } catch {
         bookmark = ""
       }
-      return ["url": url.absoluteString, "path": url.path, "name": url.lastPathComponent, "bookmark": bookmark.base64EncodedString()]
+      return ["url": url.absoluteString, "path": url.path, "name": url.lastPathComponent, "bookmark": bookmark]
   }
 
   public func documentPicker(
