@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ios_document_picker/types.dart';
 
 import 'ios_document_picker_platform_interface.dart';
@@ -9,6 +11,10 @@ class IosDocumentPicker {
     List<String>? allowedUtiTypes,
   }) {
     return IosDocumentPickerPlatform.instance.pick(type, multiple: multiple, allowedUtiTypes: allowedUtiTypes);
+  }
+
+  Future<FileSystemEntity> resolveBookmark(String bookmark, {bool isDirectory = false}) async {
+    return IosDocumentPickerPlatform.instance.resolveBookmark(bookmark, isDirectory: isDirectory);
   }
 
   Future<bool> startAccessing(String fileUrl) {
