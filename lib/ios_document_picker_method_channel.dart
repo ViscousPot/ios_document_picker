@@ -27,9 +27,9 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
   }
 
   @override
-  Future<String> resolveBookmark(String bookmark, {bool isDirectory = false}) async {
-    final String filePath = await methodChannel.invokeMethod('resolveBookmark', {'bookmark': bookmark});
-    return filePath;
+  Future<(String, String)?> resolveBookmark(String bookmark, {bool isDirectory = false}) async {
+    final bookmarkAndPath = await methodChannel.invokeMethod<(String, String)>('resolveBookmark', {'bookmark': bookmark});
+    return bookmarkAndPath;
   }
 
   @override

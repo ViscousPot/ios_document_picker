@@ -13,7 +13,7 @@ class IosDocumentPicker {
     return IosDocumentPickerPlatform.instance.pick(type, multiple: multiple, allowedUtiTypes: allowedUtiTypes);
   }
 
-  Future<String> resolveBookmark(String bookmark, {bool isDirectory = false}) async {
+  Future<(String, String)?> resolveBookmark(String bookmark, {bool isDirectory = false}) async {
     return IosDocumentPickerPlatform.instance.resolveBookmark(bookmark, isDirectory: isDirectory);
   }
 

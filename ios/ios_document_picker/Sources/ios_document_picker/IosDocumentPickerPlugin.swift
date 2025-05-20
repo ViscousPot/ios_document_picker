@@ -50,7 +50,8 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
         print("resolved bookmark to: \(url) (\(isStale))")
         if (url.isFileURL) {
           resolvedUrls[url.path] = url
-          result(url.path)
+          let data = try url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil)
+          result((data.base64EncodedString(), url.path))
         } else {
           result(FlutterError(code: "InvalidBookmark", message: "Bookmark is no file url. \(url)", details: nil))
           return
