@@ -59,22 +59,16 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
       } catch {
         result(FlutterError(code: "UnexpectedError", message: "Error while resolving bookmark \(error)", details: nil))
       }
-    // case "startAccessingSecurityScopedResourceWithBookmark":
-    //   // if let urlStr = call.arguments as? String,
-    //       let url = URL(string: urlStr) {
-    //     let success = url.startAccessingSecurityScopedResource()
-    //     result(success)
-    //   } else {
-    //     result(false)
-    //   }
-    // case "stopAccessing":
-    //   if let urlStr = call.arguments as? String,
-    //     let url = URL(string: urlStr) {
-    //     url.stopAccessingSecurityScopedResource()
-    //     result(nil)
-    //   } else {
-    //     result(FlutterError(code: "INVALID_URL", message: "Invalid URL", details: nil))
-    //   } 
+    case "startAccessing":
+      let filePath = args["filePath"] as! String
+      let fileURL = URL(fileURLWithPath: filePath)
+      let hasAccess = fileURL.startAccessingSecurityScopedResource()
+      result(hasAccess)
+    case "stopAccessing":
+      let filePath = args["filePath"] as! String
+      let fileURL = URL(fileURLWithPath: filePath)
+      fileURL.stopAccessingSecurityScopedResource()
+      result(nil)
     default:
       result(FlutterMethodNotImplemented)
     }

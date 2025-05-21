@@ -34,12 +34,12 @@ class MethodChannelIosDocumentPicker extends IosDocumentPickerPlatform {
   }
 
   @override
-  Future<bool> startAccessing(String fileUrl) async {
-    return await methodChannel.invokeMethod<bool>('startAccessing', fileUrl) ?? false;
+  Future<bool> startAccessing(String filePath) async {
+    return await methodChannel.invokeMethod<bool>('startAccessing', filePath) ?? false;
   }
 
   @override
-  Future<void> stopAccessing(String fileUrl) async {
-    await methodChannel.invokeMethod('stopAccessing', fileUrl);
+  Future<void> stopAccessing(String filePath) async {
+    await methodChannel.invokeMethod('stopAccessing', filePath);
   }
 }
