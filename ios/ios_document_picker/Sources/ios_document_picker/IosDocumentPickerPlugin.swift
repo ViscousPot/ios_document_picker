@@ -60,12 +60,12 @@ public class IosDocumentPickerPlugin: NSObject, FlutterPlugin, UIDocumentPickerD
         result(FlutterError(code: "UnexpectedError", message: "Error while resolving bookmark \(error)", details: nil))
       }
     case "startAccessing":
-      let filePath = args as! String
+      let filePath = args["path"] as! String
       let fileURL = URL(fileURLWithPath: filePath)
       let hasAccess = fileURL.startAccessingSecurityScopedResource()
       result(hasAccess)
     case "stopAccessing":
-      let filePath = args as! String
+      let filePath = args["path"] as! String
       let fileURL = URL(fileURLWithPath: filePath)
       fileURL.stopAccessingSecurityScopedResource()
       result(nil)
